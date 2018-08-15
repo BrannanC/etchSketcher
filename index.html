@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<div><button id="clear">Clear</button></div>
+<br>
+<div id="container">
+</div>
+
+<script>let size = 16;
+    const container = document.querySelector('#container');
+    container.style.display = "flex";
+    container.style.width = "80%";
+    container.style.flexWrap = "wrap";
+    
+    
+    function makeGrid(size){
+    for(i = 0; i < size * size; i++){
+        const content = document.createElement('div');
+        content.style.height = 600 / size + "px";
+        content.style.width = (1 / size) * 100 + "%";
+        content.style.display = "inline";
+        content.style.backgroundColor = "red";
+        container.append(content);
+        content.textContent = " ";
+        content.className = "panel";
+        content.addEventListener('mouseleave',function (e){
+            e.target.style.background = "black";
+    })
+    }
+    }
+    
+    makeGrid(size);
+    
+    const clearButton = document.querySelector('#clear');
+    clearButton.addEventListener('click', function(){
+      let contents = document.querySelectorAll('.panel');
+      contents.forEach(function(element){
+        element.style.backgroundColor = 'white';
+        container.removeChild(element);
+      })
+      size = Number(prompt("How many panels per side?", "16"))
+      if(size <= 0 || size > 300 || isNaN(size)){size = 16;}
+      makeGrid(size);
+    });
+    
+    </script>
